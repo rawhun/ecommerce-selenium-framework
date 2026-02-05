@@ -1,6 +1,3 @@
-"""
-Test cases for shopping cart functionality.
-"""
 
 import pytest
 from pages.home_page import HomePage
@@ -9,10 +6,8 @@ from utils.logger import log_test_start, log_test_end
 
 @pytest.mark.smoke
 class TestShoppingCart:
-    """Test suite for shopping cart functionality."""
     
     def test_add_product_to_cart(self, driver, test_data):
-        """Test adding a product to cart."""
         log_test_start("test_add_product_to_cart")
         
         # Search and add product to cart
@@ -35,7 +30,6 @@ class TestShoppingCart:
         log_test_end("test_add_product_to_cart", "PASSED")
     
     def test_add_multiple_products_to_cart(self, driver, test_data):
-        """Test adding multiple products to cart."""
         log_test_start("test_add_multiple_products_to_cart")
         
         home_page = HomePage(driver)
@@ -58,7 +52,6 @@ class TestShoppingCart:
         log_test_end("test_add_multiple_products_to_cart", "PASSED")
     
     def test_update_cart_quantity(self, driver, test_data):
-        """Test updating product quantity in cart."""
         log_test_start("test_update_cart_quantity")
         
         # Add product to cart
@@ -82,7 +75,6 @@ class TestShoppingCart:
         log_test_end("test_update_cart_quantity", "PASSED")
     
     def test_remove_product_from_cart(self, driver, test_data):
-        """Test removing a product from cart."""
         log_test_start("test_remove_product_from_cart")
         
         # Add product to cart
@@ -106,7 +98,6 @@ class TestShoppingCart:
         log_test_end("test_remove_product_from_cart", "PASSED")
     
     def test_cart_total_price(self, driver, test_data):
-        """Test cart displays total price."""
         log_test_start("test_cart_total_price")
         
         # Add product to cart

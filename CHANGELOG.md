@@ -42,4 +42,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PEP 8 compliant code
 - Type hints and comprehensive docstrings
 
-[1.0.0]: https://github.com/yourusername/ecommerce-selenium-framework/releases/tag/v1.0.0
+[1.0.0]: https://github.com/rawhun/ecommerce-selenium-framework/releases/tag/v1.0.0

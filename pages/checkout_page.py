@@ -1,6 +1,3 @@
-"""
-Checkout page object for e-commerce site.
-"""
 
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
@@ -10,7 +7,6 @@ logger = get_logger(__name__)
 
 
 class CheckoutPage(BasePage):
-    """Page object for checkout page."""
     
     # Locators - Step 1: Checkout Options
     GUEST_CHECKOUT_RADIO = (By.CSS_SELECTOR, "input[value='guest']")
@@ -46,11 +42,9 @@ class CheckoutPage(BasePage):
     ORDER_NUMBER = (By.CSS_SELECTOR, "#content p:nth-child(2)")
     
     def __init__(self, driver):
-        """Initialize checkout page."""
         super().__init__(driver)
     
     def select_guest_checkout(self):
-        """Select guest checkout option."""
         logger.info("Selecting guest checkout")
         if self.is_element_present(self.GUEST_CHECKOUT_RADIO, timeout=5):
             self.click_element(self.GUEST_CHECKOUT_RADIO)
@@ -59,20 +53,6 @@ class CheckoutPage(BasePage):
     def fill_billing_details(self, first_name, last_name, email, telephone, 
                             address, city, postcode, country="United States", 
                             region="California"):
-        """
-        Fill billing details form.
-        
-        Args:
-            first_name (str): First name
-            last_name (str): Last name
-            email (str): Email address
-            telephone (str): Telephone number
-            address (str): Street address
-            city (str): City
-            postcode (str): Postal code
-            country (str): Country name
-            region (str): Region/State name
-        """
         logger.info(f"Filling billing details for: {email}")
         
         self.send_keys_to_element(self.FIRST_NAME_INPUT, first_name)
@@ -90,42 +70,27 @@ class CheckoutPage(BasePage):
         self.click_element(self.BILLING_CONTINUE)
     
     def continue_delivery_details(self):
-        """Continue from delivery details step."""
         logger.info("Continuing delivery details")
         if self.is_element_present(self.DELIVERY_CONTINUE, timeout=5):
             self.click_element(self.DELIVERY_CONTINUE)
     
     def continue_delivery_method(self):
-        """Continue from delivery method step."""
         logger.info("Continuing delivery method")
         if self.is_element_present(self.DELIVERY_METHOD_CONTINUE, timeout=5):
             self.click_element(self.DELIVERY_METHOD_CONTINUE)
     
     def accept_terms_and_continue_payment(self):
-        """Accept terms and continue payment method."""
         logger.info("Accepting terms and continuing payment")
         if self.is_element_present(self.TERMS_CHECKBOX, timeout=5):
             self.click_element(self.TERMS_CHECKBOX)
             self.click_element(self.PAYMENT_METHOD_CONTINUE)
     
     def confirm_order(self):
-        """
-        Confirm the order.
-        
-        Returns:
-            bool: True if order confirmed successfully
-        """
         logger.info("Confirming order")
         self.click_element(self.CONFIRM_ORDER_BUTTON)
         return self.is_order_success()
     
     def is_order_success(self):
-        """
-        Check if order was successful.
-        
-        Returns:
-            bool: True if order success message is displayed
-        """
         try:
             message = self.get_element_text(self.SUCCESS_MESSAGE, timeout=10)
             return "placed" in message.lower() or "success" in message.lower()
@@ -133,12 +98,6 @@ class CheckoutPage(BasePage):
             return False
     
     def get_order_number(self):
-        """
-        Get order number from success page.
-        
-        Returns:
-            str: Order number
-        """
         if self.is_order_success():
             text = self.get_element_text(self.ORDER_NUMBER)
             logger.info(f"Order number: {text}")
@@ -146,15 +105,6 @@ class CheckoutPage(BasePage):
         return ""
     
     def complete_guest_checkout(self, billing_details):
-        """
-        Complete full guest checkout process.
-        
-        Args:
-            billing_details (dict): Dictionary with billing information
-            
-        Returns:
-            bool: True if checkout completed successfully
-        """
         logger.info("Starting guest checkout process")
         
         # Step 1: Select guest checkout
@@ -186,11 +136,5 @@ class CheckoutPage(BasePage):
         return self.confirm_order()
     
     def is_page_loaded(self):
-        """
-        Check if checkout page is loaded.
-        
-        Returns:
-            bool: True if page is loaded
-        """
         return self.is_element_present(self.GUEST_CHECKOUT_RADIO, timeout=10) or \
                self.is_element_present(self.FIRST_NAME_INPUT, timeout=10)

@@ -1,6 +1,3 @@
-"""
-Screenshot capture utilities for test reporting.
-"""
 
 import os
 from datetime import datetime
@@ -13,17 +10,6 @@ logger = get_logger(__name__)
 
 
 def capture_screenshot(driver, filename=None, full_page=False):
-    """
-    Capture screenshot and save to reports directory.
-    
-    Args:
-        driver: WebDriver instance
-        filename (str): Custom filename, auto-generated if None
-        full_page (bool): Whether to capture full page screenshot
-        
-    Returns:
-        str: Path to saved screenshot
-    """
     # Create screenshots directory
     screenshots_dir = os.path.join(
         os.path.dirname(os.path.dirname(__file__)), 
@@ -62,15 +48,6 @@ def capture_screenshot(driver, filename=None, full_page=False):
 
 
 def capture_full_page_screenshot(driver):
-    """
-    Capture full page screenshot by scrolling.
-    
-    Args:
-        driver: WebDriver instance
-        
-    Returns:
-        bytes: Screenshot data
-    """
     # Get page dimensions
     total_height = driver.execute_script("return document.body.scrollHeight")
     viewport_height = driver.execute_script("return window.innerHeight")
@@ -120,17 +97,6 @@ def capture_full_page_screenshot(driver):
 
 
 def capture_element_screenshot(driver, element, filename=None):
-    """
-    Capture screenshot of specific element.
-    
-    Args:
-        driver: WebDriver instance
-        element: WebElement to capture
-        filename (str): Custom filename, auto-generated if None
-        
-    Returns:
-        str: Path to saved screenshot
-    """
     # Create screenshots directory
     screenshots_dir = os.path.join(
         os.path.dirname(os.path.dirname(__file__)), 
@@ -166,13 +132,6 @@ def capture_element_screenshot(driver, element, filename=None):
 
 
 def attach_screenshot_to_allure(driver, name="Screenshot"):
-    """
-    Attach screenshot to Allure report.
-    
-    Args:
-        driver: WebDriver instance
-        name (str): Screenshot name in report
-    """
     try:
         import allure
         screenshot_data = driver.get_screenshot_as_png()

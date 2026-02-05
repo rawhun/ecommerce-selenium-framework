@@ -1,7 +1,3 @@
-"""
-Test cases for login functionality.
-"""
-
 import pytest
 from pages.home_page import HomePage
 from utils.logger import log_test_start, log_test_end
@@ -10,10 +6,8 @@ from utils.logger import log_test_start, log_test_end
 @pytest.mark.smoke
 @pytest.mark.critical
 class TestLogin:
-    """Test suite for login functionality."""
     
     def test_valid_login(self, driver, test_data):
-        """Test login with valid credentials."""
         log_test_start("test_valid_login")
         
         # Navigate to home page and go to login
@@ -30,7 +24,6 @@ class TestLogin:
         log_test_end("test_valid_login", "PASSED")
     
     def test_invalid_login(self, driver, test_data):
-        """Test login with invalid credentials."""
         log_test_start("test_invalid_login")
         
         # Navigate to login page
@@ -49,7 +42,6 @@ class TestLogin:
         log_test_end("test_invalid_login", "PASSED")
     
     def test_login_with_empty_credentials(self, driver):
-        """Test login with empty credentials."""
         log_test_start("test_login_with_empty_credentials")
         
         # Navigate to login page
@@ -66,7 +58,6 @@ class TestLogin:
     
     @pytest.mark.smoke
     def test_logout(self, driver, test_data):
-        """Test logout functionality."""
         log_test_start("test_logout")
         
         # Login first

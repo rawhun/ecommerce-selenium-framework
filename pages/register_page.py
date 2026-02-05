@@ -1,6 +1,3 @@
-"""
-Registration page object for e-commerce site.
-"""
 
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
@@ -10,7 +7,6 @@ logger = get_logger(__name__)
 
 
 class RegisterPage(BasePage):
-    """Page object for registration page."""
     
     # Locators
     FIRST_NAME_INPUT = (By.ID, "input-firstname")
@@ -27,25 +23,10 @@ class RegisterPage(BasePage):
     NEWSLETTER_NO_RADIO = (By.CSS_SELECTOR, "input[name='newsletter'][value='0']")
     
     def __init__(self, driver):
-        """Initialize registration page."""
         super().__init__(driver)
     
     def register(self, first_name, last_name, email, telephone, password, 
                  subscribe_newsletter=False):
-        """
-        Register a new user account.
-        
-        Args:
-            first_name (str): User's first name
-            last_name (str): User's last name
-            email (str): User's email
-            telephone (str): User's telephone
-            password (str): User's password
-            subscribe_newsletter (bool): Whether to subscribe to newsletter
-            
-        Returns:
-            AccountPage: Account page object after successful registration
-        """
         logger.info(f"Registering new user: {email}")
         
         self.send_keys_to_element(self.FIRST_NAME_INPUT, first_name)
@@ -67,41 +48,17 @@ class RegisterPage(BasePage):
         return AccountPage(self.driver)
     
     def get_success_message(self):
-        """
-        Get success message text.
-        
-        Returns:
-            str: Success message text
-        """
         if self.is_element_visible(self.SUCCESS_MESSAGE, timeout=5):
             return self.get_element_text(self.SUCCESS_MESSAGE)
         return ""
     
     def get_error_message(self):
-        """
-        Get error message text.
-        
-        Returns:
-            str: Error message text
-        """
         if self.is_element_visible(self.ERROR_MESSAGE, timeout=5):
             return self.get_element_text(self.ERROR_MESSAGE)
         return ""
     
     def is_error_displayed(self):
-        """
-        Check if error message is displayed.
-        
-        Returns:
-            bool: True if error is displayed
-        """
         return self.is_element_visible(self.ERROR_MESSAGE, timeout=5)
     
     def is_page_loaded(self):
-        """
-        Check if registration page is loaded.
-        
-        Returns:
-            bool: True if page is loaded
-        """
         return self.is_element_visible(self.FIRST_NAME_INPUT, timeout=10)

@@ -1,6 +1,3 @@
-"""
-WebDriver factory for creating and configuring browser instances.
-"""
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -16,21 +13,9 @@ logger = get_logger(__name__)
 
 
 class DriverFactory:
-    """Factory class for creating WebDriver instances."""
     
     @staticmethod
     def create_driver(browser="chrome", headless=False, **kwargs):
-        """
-        Create a WebDriver instance based on browser type.
-        
-        Args:
-            browser (str): Browser type ('chrome' or 'firefox')
-            headless (bool): Whether to run in headless mode
-            **kwargs: Additional options for browser configuration
-            
-        Returns:
-            WebDriver: Configured WebDriver instance
-        """
         browser = browser.lower()
         logger.info(f"Creating {browser} driver (headless: {headless})")
         
@@ -43,7 +28,6 @@ class DriverFactory:
     
     @staticmethod
     def _create_chrome_driver(headless=False, **kwargs):
-        """Create Chrome WebDriver instance."""
         options = ChromeOptions()
         
         if headless:
@@ -84,7 +68,6 @@ class DriverFactory:
     
     @staticmethod
     def _create_firefox_driver(headless=False, **kwargs):
-        """Create Firefox WebDriver instance."""
         options = FirefoxOptions()
         
         if headless:
@@ -109,14 +92,6 @@ class DriverFactory:
     
     @staticmethod
     def configure_driver(driver, implicit_wait=10, page_load_timeout=30):
-        """
-        Configure WebDriver with common settings.
-        
-        Args:
-            driver: WebDriver instance
-            implicit_wait (int): Implicit wait timeout in seconds
-            page_load_timeout (int): Page load timeout in seconds
-        """
         driver.implicitly_wait(implicit_wait)
         driver.set_page_load_timeout(page_load_timeout)
         driver.maximize_window()

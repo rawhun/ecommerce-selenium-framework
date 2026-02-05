@@ -1,6 +1,3 @@
-"""
-Logger configuration for the automation framework.
-"""
 
 import logging
 import os
@@ -9,15 +6,6 @@ import colorlog
 
 
 def get_logger(name):
-    """
-    Get a configured logger instance.
-    
-    Args:
-        name (str): Logger name (usually __name__)
-        
-    Returns:
-        logging.Logger: Configured logger instance
-    """
     logger = logging.getLogger(name)
     
     # Avoid adding handlers multiple times
@@ -68,7 +56,6 @@ def get_logger(name):
 
 
 def log_test_start(test_name):
-    """Log test start with separator."""
     logger = get_logger("TEST")
     logger.info("=" * 80)
     logger.info(f"STARTING TEST: {test_name}")
@@ -76,7 +63,6 @@ def log_test_start(test_name):
 
 
 def log_test_end(test_name, status="COMPLETED"):
-    """Log test end with separator."""
     logger = get_logger("TEST")
     logger.info("=" * 80)
     logger.info(f"TEST {status}: {test_name}")

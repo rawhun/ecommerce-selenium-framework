@@ -1,6 +1,6 @@
 # E-Commerce Selenium Automation Framework
 
-[![CI](https://github.com/yourusername/ecommerce-selenium-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/ecommerce-selenium-framework/actions/workflows/ci.yml)
+[![CI](https://github.com/rawhun/ecommerce-selenium-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/rawhun/ecommerce-selenium-framework/actions/workflows/ci.yml)
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -44,7 +44,7 @@ ecommerce-selenium-framework/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/ecommerce-selenium-framework.git
+   git clone https://github.com/rawhun/ecommerce-selenium-framework.git
    cd ecommerce-selenium-framework
    ```
 
@@ -225,6 +225,6 @@ This project is actively maintained. For the latest updates, see [CHANGELOG.md](
 ## Support
 
 - 📖 [Documentation](README.md)
-- 🐛 [Report Bug](https://github.com/yourusername/ecommerce-selenium-framework/issues/new?template=bug_report.md)
-- 💡 [Request Feature](https://github.com/yourusername/ecommerce-selenium-framework/issues/new?template=feature_request.md)
-- 💬 [Discussions](https://github.com/yourusername/ecommerce-selenium-framework/discussions)
+- 🐛 [Report Bug](https://github.com/rawhun/ecommerce-selenium-framework/issues/new?template=bug_report.md)
+- 💡 [Request Feature](https://github.com/rawhun/ecommerce-selenium-framework/issues/new?template=feature_request.md)
+- 💬 [Discussions](https://github.com/rawhun/ecommerce-selenium-framework/discussions)

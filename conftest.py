@@ -1,7 +1,3 @@
-"""
-Global pytest configuration and fixtures for the e-commerce automation framework.
-"""
-
 import json
 import os
 import pytest
@@ -21,7 +17,6 @@ logger = get_logger(__name__)
 
 
 def pytest_addoption(parser):
-    """Add command line options for pytest."""
     parser.addoption(
         "--browser",
         action="store",
@@ -44,7 +39,6 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="session")
 def config():
-    """Load configuration from config file."""
     config_path = os.path.join(os.path.dirname(__file__), "config", "config.json")
     try:
         with open(config_path, 'r') as f:
@@ -60,7 +54,6 @@ def config():
 
 @pytest.fixture(scope="session")
 def test_data():
-    """Load test data from JSON files."""
     data_dir = os.path.join(os.path.dirname(__file__), "data")
     test_data = {}
     
@@ -81,7 +74,6 @@ def test_data():
 
 @pytest.fixture(scope="function")
 def driver(request, config):
-    """Create and configure WebDriver instance."""
     browser = request.config.getoption("--browser").lower()
     headless = request.config.getoption("--headless")
     base_url = request.config.getoption("--base-url")
@@ -139,7 +131,6 @@ def driver(request, config):
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """Capture screenshot on test failure."""
     outcome = yield
     rep = outcome.get_result()
     
@@ -163,7 +154,6 @@ def pytest_runtest_makereport(item, call):
 
 
 def pytest_configure(config):
-    """Configure pytest markers."""
     config.addinivalue_line(
         "markers", "smoke: mark test as smoke test"
     )
@@ -176,7 +166,6 @@ def pytest_configure(config):
 
 
 def pytest_collection_modifyitems(config, items):
-    """Modify test collection to add markers based on test names."""
     for item in items:
         # Add smoke marker to tests with 'smoke' in name
         if "smoke" in item.name.lower():

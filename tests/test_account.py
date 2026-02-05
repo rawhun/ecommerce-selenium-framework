@@ -1,6 +1,3 @@
-"""
-Test cases for account management functionality.
-"""
 
 import pytest
 from datetime import datetime
@@ -9,10 +6,8 @@ from utils.logger import log_test_start, log_test_end
 
 
 class TestAccount:
-    """Test suite for account management functionality."""
     
     def test_update_account_information(self, driver, test_data):
-        """Test updating account information."""
         log_test_start("test_update_account_information")
         
         # Login
@@ -35,7 +30,6 @@ class TestAccount:
         log_test_end("test_update_account_information", "PASSED")
     
     def test_view_order_history(self, driver, test_data):
-        """Test viewing order history."""
         log_test_start("test_view_order_history")
         
         # Login
@@ -61,7 +55,6 @@ class TestAccount:
         log_test_end("test_view_order_history", "PASSED")
     
     def test_account_navigation(self, driver, test_data):
-        """Test navigation within account pages."""
         log_test_start("test_account_navigation")
         
         # Login

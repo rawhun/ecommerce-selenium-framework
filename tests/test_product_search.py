@@ -1,6 +1,3 @@
-"""
-Test cases for product search functionality.
-"""
 
 import pytest
 from pages.home_page import HomePage
@@ -9,10 +6,8 @@ from utils.logger import log_test_start, log_test_end
 
 @pytest.mark.smoke
 class TestProductSearch:
-    """Test suite for product search functionality."""
     
     def test_search_valid_product(self, driver, test_data):
-        """Test searching for a valid product."""
         log_test_start("test_search_valid_product")
         
         # Navigate to home page
@@ -31,7 +26,6 @@ class TestProductSearch:
         log_test_end("test_search_valid_product", "PASSED")
     
     def test_search_invalid_product(self, driver, test_data):
-        """Test searching for a non-existent product."""
         log_test_start("test_search_invalid_product")
         
         # Navigate to home page
@@ -49,7 +43,6 @@ class TestProductSearch:
         log_test_end("test_search_invalid_product", "PASSED")
     
     def test_search_multiple_products(self, driver, test_data):
-        """Test searching for multiple different products."""
         log_test_start("test_search_multiple_products")
         
         home_page = HomePage(driver)
@@ -69,7 +62,6 @@ class TestProductSearch:
         log_test_end("test_search_multiple_products", "PASSED")
     
     def test_view_product_details(self, driver, test_data):
-        """Test viewing product details from search results."""
         log_test_start("test_view_product_details")
         
         # Search for product

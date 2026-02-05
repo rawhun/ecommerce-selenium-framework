@@ -1,6 +1,3 @@
-"""
-End-to-end test cases covering complete user flows.
-"""
 
 import pytest
 from datetime import datetime
@@ -11,10 +8,8 @@ from utils.logger import log_test_start, log_test_end
 @pytest.mark.smoke
 @pytest.mark.critical
 class TestE2EFlows:
-    """Test suite for end-to-end user flows."""
     
     def test_complete_purchase_flow_guest(self, driver, test_data):
-        """Test complete purchase flow as guest user."""
         log_test_start("test_complete_purchase_flow_guest")
         
         # Step 1: Search for product
@@ -45,7 +40,6 @@ class TestE2EFlows:
         log_test_end("test_complete_purchase_flow_guest", "PASSED")
     
     def test_login_search_add_to_cart_logout(self, driver, test_data):
-        """Test login, search, add to cart, and logout flow."""
         log_test_start("test_login_search_add_to_cart_logout")
         
         # Step 1: Login
@@ -78,7 +72,6 @@ class TestE2EFlows:
         log_test_end("test_login_search_add_to_cart_logout", "PASSED")
     
     def test_login_update_profile_view_orders(self, driver, test_data):
-        """Test login, update profile, and view order history flow."""
         log_test_start("test_login_update_profile_view_orders")
         
         # Step 1: Login
@@ -108,7 +101,6 @@ class TestE2EFlows:
         log_test_end("test_login_update_profile_view_orders", "PASSED")
     
     def test_search_multiple_products_add_to_cart(self, driver, test_data):
-        """Test searching and adding multiple products to cart."""
         log_test_start("test_search_multiple_products_add_to_cart")
         
         home_page = HomePage(driver)

@@ -1,6 +1,3 @@
-"""
-Wait helper utilities for robust element interactions.
-"""
 
 import time
 from selenium.webdriver.support.ui import WebDriverWait
@@ -20,31 +17,13 @@ logger = get_logger(__name__)
 
 
 class WaitHelpers:
-    """Helper class for common wait operations."""
     
     def __init__(self, driver, timeout=20):
-        """
-        Initialize wait helpers.
-        
-        Args:
-            driver: WebDriver instance
-            timeout (int): Default timeout in seconds
-        """
         self.driver = driver
         self.wait = WebDriverWait(driver, timeout)
         self.timeout = timeout
     
     def wait_for_element_visible(self, locator, timeout=None):
-        """
-        Wait for element to be visible.
-        
-        Args:
-            locator (tuple): Locator tuple (By.ID, "element_id")
-            timeout (int): Custom timeout, uses default if None
-            
-        Returns:
-            WebElement: The visible element
-        """
         wait_time = timeout or self.timeout
         try:
             element = WebDriverWait(self.driver, wait_time).until(
@@ -57,16 +36,6 @@ class WaitHelpers:
             raise
     
     def wait_for_element_clickable(self, locator, timeout=None):
-        """
-        Wait for element to be clickable.
-        
-        Args:
-            locator (tuple): Locator tuple (By.ID, "element_id")
-            timeout (int): Custom timeout, uses default if None
-            
-        Returns:
-            WebElement: The clickable element
-        """
         wait_time = timeout or self.timeout
         try:
             element = WebDriverWait(self.driver, wait_time).until(
@@ -79,16 +48,6 @@ class WaitHelpers:
             raise
     
     def wait_for_element_present(self, locator, timeout=None):
-        """
-        Wait for element to be present in DOM.
-        
-        Args:
-            locator (tuple): Locator tuple (By.ID, "element_id")
-            timeout (int): Custom timeout, uses default if None
-            
-        Returns:
-            WebElement: The present element
-        """
         wait_time = timeout or self.timeout
         try:
             element = WebDriverWait(self.driver, wait_time).until(
@@ -101,17 +60,6 @@ class WaitHelpers:
             raise
     
     def wait_for_text_in_element(self, locator, text, timeout=None):
-        """
-        Wait for specific text to appear in element.
-        
-        Args:
-            locator (tuple): Locator tuple (By.ID, "element_id")
-            text (str): Text to wait for
-            timeout (int): Custom timeout, uses default if None
-            
-        Returns:
-            bool: True if text found
-        """
         wait_time = timeout or self.timeout
         try:
             result = WebDriverWait(self.driver, wait_time).until(
@@ -124,16 +72,6 @@ class WaitHelpers:
             raise
     
     def wait_for_url_contains(self, url_fragment, timeout=None):
-        """
-        Wait for URL to contain specific fragment.
-        
-        Args:
-            url_fragment (str): URL fragment to wait for
-            timeout (int): Custom timeout, uses default if None
-            
-        Returns:
-            bool: True if URL contains fragment
-        """
         wait_time = timeout or self.timeout
         try:
             result = WebDriverWait(self.driver, wait_time).until(
@@ -146,16 +84,6 @@ class WaitHelpers:
             raise
     
     def wait_for_element_to_disappear(self, locator, timeout=None):
-        """
-        Wait for element to disappear from DOM.
-        
-        Args:
-            locator (tuple): Locator tuple (By.ID, "element_id")
-            timeout (int): Custom timeout, uses default if None
-            
-        Returns:
-            bool: True if element disappeared
-        """
         wait_time = timeout or self.timeout
         try:
             result = WebDriverWait(self.driver, wait_time).until_not(
@@ -168,17 +96,6 @@ class WaitHelpers:
             raise
     
     def safe_click(self, locator, timeout=None, retries=3):
-        """
-        Perform a safe click with retry mechanism.
-        
-        Args:
-            locator (tuple): Locator tuple (By.ID, "element_id")
-            timeout (int): Custom timeout, uses default if None
-            retries (int): Number of retry attempts
-            
-        Returns:
-            bool: True if click successful
-        """
         wait_time = timeout or self.timeout
         
         for attempt in range(retries):
@@ -219,15 +136,6 @@ class WaitHelpers:
         return False
     
     def safe_send_keys(self, locator, text, clear_first=True, timeout=None):
-        """
-        Safely send keys to an element.
-        
-        Args:
-            locator (tuple): Locator tuple (By.ID, "element_id")
-            text (str): Text to send
-            clear_first (bool): Whether to clear field first
-            timeout (int): Custom timeout, uses default if None
-        """
         wait_time = timeout or self.timeout
         element = self.wait_for_element_visible(locator, wait_time)
         
@@ -238,16 +146,6 @@ class WaitHelpers:
         logger.debug(f"Sent keys to element: {locator}")
     
     def wait_and_get_text(self, locator, timeout=None):
-        """
-        Wait for element and get its text.
-        
-        Args:
-            locator (tuple): Locator tuple (By.ID, "element_id")
-            timeout (int): Custom timeout, uses default if None
-            
-        Returns:
-            str: Element text
-        """
         element = self.wait_for_element_visible(locator, timeout)
         text = element.text.strip()
         logger.debug(f"Got text from element {locator}: {text}")

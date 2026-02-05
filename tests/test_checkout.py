@@ -1,6 +1,3 @@
-"""
-Test cases for checkout functionality.
-"""
 
 import pytest
 from datetime import datetime
@@ -10,11 +7,9 @@ from utils.logger import log_test_start, log_test_end
 
 @pytest.mark.critical
 class TestCheckout:
-    """Test suite for checkout functionality."""
     
     @pytest.mark.smoke
     def test_guest_checkout(self, driver, test_data):
-        """Test complete guest checkout process."""
         log_test_start("test_guest_checkout")
         
         # Add product to cart
@@ -45,7 +40,6 @@ class TestCheckout:
         log_test_end("test_guest_checkout", "PASSED")
     
     def test_checkout_with_empty_cart(self, driver):
-        """Test checkout with empty cart."""
         log_test_start("test_checkout_with_empty_cart")
         
         # Navigate to cart
@@ -63,7 +57,6 @@ class TestCheckout:
         log_test_end("test_checkout_with_empty_cart", "PASSED")
     
     def test_proceed_to_checkout_button(self, driver, test_data):
-        """Test proceed to checkout button functionality."""
         log_test_start("test_proceed_to_checkout_button")
         
         # Add product to cart
