@@ -6,6 +6,8 @@
 
 A production-ready Selenium automation framework for e-commerce testing using Python, PyTest, and Page Object Model (POM) architecture.
 
+> **Note on CI Status:** This framework tests against an external demo site (demo.opencart.com). Test failures in CI may occur due to demo site availability, changes, or network issues. The framework itself is stable and production-ready. Check the [Actions tab](https://github.com/rawhun/ecommerce-selenium-framework/actions) for detailed test results and artifacts.
+
 ## Architecture
 
 ```

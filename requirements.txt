@@ -3,6 +3,7 @@ pytest==7.4.3
 pytest-html==4.1.1
 pytest-xdist==3.3.1
 pytest-rerunfailures==12.0
+pytest-timeout==2.2.0
 
 # Selenium and browser management
 selenium==4.15.2
