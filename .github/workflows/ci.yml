@@ -1,0 +1,169 @@
+name: E-Commerce Selenium Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
+      fail-fast: false
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+    
+    - name: Start Xvfb (Virtual Display)
+      run: |
+        sudo apt-get install -y xvfb
+        Xvfb :99 -screen 0 1920x1080x24 &
+        echo "DISPLAY=:99" >> $GITHUB_ENV
+    
+    - name: Create reports directories
+      run: |
+        mkdir -p reports/screenshots
+        mkdir -p reports/logs
+        mkdir -p reports/allure
+        mkdir -p reports/html
+    
+    - name: Run smoke tests
+      run: |
+        pytest tests/ -m smoke --headless --browser chrome \
+          --alluredir=reports/allure \
+          --html=reports/html/report.html --self-contained-html \
+          --junitxml=reports/junit.xml \
+          -v
+      continue-on-error: true
+    
+    - name: Run all tests (parallel)
+      if: success() || failure()
+      run: |
+        pytest tests/ --headless --browser chrome \
+          -n auto \
+          --alluredir=reports/allure \
+          --html=reports/html/report_full.html --self-contained-html \
+          --junitxml=reports/junit_full.xml \
+          -v
+      continue-on-error: true
+    
+    - name: Generate Allure report
+      if: always()
+      run: |
+        # Install Allure
+        wget https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz
+        tar -zxvf allure-2.24.1.tgz
+        sudo mv allure-2.24.1 /opt/allure
+        sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+        
+        # Generate report
+        allure generate reports/allure -o reports/allure-report --clean
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-${{ matrix.python-version }}
+        path: |
+          reports/
+          !reports/allure
+        retention-days: 30
+    
+    - name: Upload Allure report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report-${{ matrix.python-version }}
+        path: reports/allure-report
+        retention-days: 30
+    
+    - name: Upload screenshots
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots-${{ matrix.python-version }}
+        path: reports/screenshots
+        retention-days: 30
+    
+    - name: Publish test results
+      if: always()
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      with:
+        files: reports/junit*.xml
+        check_name: Test Results (Python ${{ matrix.python-version }})
+    
+    - name: Comment PR with test results
+      if: github.event_name == 'pull_request' && always()
+      uses: actions/github-script@v6
+      continue-on-error: true
+      with:
+        script: |
+          const fs = require('fs');
+          const reportPath = 'reports/html/report.html';
+          if (fs.existsSync(reportPath)) {
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ Test execution completed. Check artifacts for detailed reports.'
+            });
+          }
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 black isort
+    
+    - name: Run flake8
+      run: |
+        flake8 pages/ tests/ utils/ --max-line-length=100 --exclude=__pycache__
+      continue-on-error: true
+    
+    - name: Check code formatting with black
+      run: |
+        black --check pages/ tests/ utils/
+      continue-on-error: true
+    
+    - name: Check import sorting with isort
+      run: |
+        isort --check-only pages/ tests/ utils/
+      continue-on-error: true

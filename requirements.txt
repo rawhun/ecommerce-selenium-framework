@@ -1,0 +1,28 @@
+# Core testing framework
+pytest==7.4.3
+pytest-html==4.1.1
+pytest-xdist==3.3.1
+pytest-rerunfailures==12.0
+
+# Selenium and browser management
+selenium==4.15.2
+webdriver-manager==4.0.1
+
+# Reporting
+allure-pytest==2.13.2
+
+# Data handling
+pyyaml==6.0.1
+jsonschema==4.19.2
+
+# Utilities
+python-dotenv==1.0.0
+Pillow==10.1.0
+
+# Logging
+colorlog==6.8.0
+
+# Development tools
+black==23.11.0
+flake8==6.1.0
+isort==5.12.0

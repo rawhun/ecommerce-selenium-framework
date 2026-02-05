@@ -1,0 +1,41 @@
+{
+  "valid_user": {
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john.doe.test@example.com",
+    "telephone": "5551234567",
+    "password": "TestPass123!",
+    "address": "123 Main Street",
+    "city": "Los Angeles",
+    "postcode": "90001",
+    "country": "United States",
+    "region": "California"
+  },
+  "new_user": {
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "email": "jane.smith.test@example.com",
+    "telephone": "5559876543",
+    "password": "SecurePass456!",
+    "address": "456 Oak Avenue",
+    "city": "San Francisco",
+    "postcode": "94102",
+    "country": "United States",
+    "region": "California"
+  },
+  "guest_user": {
+    "first_name": "Guest",
+    "last_name": "User",
+    "email": "guest.test@example.com",
+    "telephone": "5555555555",
+    "address": "789 Pine Road",
+    "city": "San Diego",
+    "postcode": "92101",
+    "country": "United States",
+    "region": "California"
+  },
+  "invalid_user": {
+    "email": "invalid.test@example.com",
+    "password": "WrongPassword123"
+  }
+}

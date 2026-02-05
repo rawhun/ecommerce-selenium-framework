@@ -1,0 +1,22 @@
+{
+  "base_url": "https://demo.opencart.com",
+  "implicit_wait": 10,
+  "explicit_wait": 20,
+  "page_load_timeout": 30,
+  "browser": "chrome",
+  "headless": false,
+  "test_users": {
+    "valid_user": {
+      "email": "test.user@example.com",
+      "password": "TestPassword123"
+    }
+  },
+  "screenshots": {
+    "on_failure": true,
+    "on_success": false
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "reports/logs/test.log"
+  }
+}

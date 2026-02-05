@@ -1,0 +1,29 @@
+{
+  "search_terms": {
+    "valid": ["MacBook", "iPhone", "Canon", "Samsung"],
+    "invalid": ["XYZ123NonExistentProduct"]
+  },
+  "products": [
+    {
+      "name": "MacBook",
+      "category": "Laptops & Notebooks",
+      "expected_in_results": true
+    },
+    {
+      "name": "iPhone",
+      "category": "Phones & PDAs",
+      "expected_in_results": true
+    },
+    {
+      "name": "Canon EOS 5D",
+      "category": "Cameras",
+      "expected_in_results": true
+    },
+    {
+      "name": "Samsung Galaxy Tab",
+      "category": "Tablets",
+      "expected_in_results": true
+    }
+  ],
+  "test_quantities": [1, 2, 5]
+}
